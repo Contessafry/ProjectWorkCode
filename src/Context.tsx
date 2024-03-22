@@ -46,7 +46,7 @@ export function MainContext({ children }: PropsWithChildren) {
   }
 
   function logIn() {
-    localStorage.setItem("UserLogged", JSON.stringify(UserLogged));
+    localStorage.setItem("UserLogged", JSON.stringify(userLogged));
   }
 
   function checkAdmin() {}
