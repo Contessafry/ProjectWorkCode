@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import "./App.css";
-import { AppContext } from "./Context";
-import CardComp from "./components/Cards";
+import { AppContext } from "../Context";
 import { Grid } from "@mui/joy";
+import CardComp from "../components/Cards";
 
-function App() {
-  const products = useContext(AppContext);
+function PageHome() {
+  const { products } = useContext(AppContext);
 
   if (!products) return <div>Loading...</div>;
   return (
@@ -15,11 +15,11 @@ function App() {
       rowSpacing={1}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
     >
-      {products.products.map((product) => (
+      {products.map((product) => (
         <CardComp key={product.id} product={product} />
       ))}
     </Grid>
   );
 }
 
-export default App;
+export default PageHome;
