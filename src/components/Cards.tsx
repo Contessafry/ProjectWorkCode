@@ -16,7 +16,7 @@ interface Props {
 export default function CardComp({ product }: Props) {
   const { title, price, category, description, image } = product;
   return (
-    <Card sx={{ width: 320 }}>
+    <Card sx={{ width: 320, margin: "1em" }}>
       <div>
         <Typography level="title-lg">{title}</Typography>
         <Typography level="body-sm">{category}</Typography>
@@ -42,7 +42,7 @@ export default function CardComp({ product }: Props) {
         <div>
           <Typography level="body-xs">Price:</Typography>
           <Typography fontSize="lg" fontWeight="lg">
-            {price}
+            {price}€
           </Typography>
         </div>
         <Button
@@ -52,7 +52,7 @@ export default function CardComp({ product }: Props) {
           aria-label="Explore Bahamas Islands"
           sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
         >
-          Cliccami
+          Buy
         </Button>
       </CardContent>
     </Card>
