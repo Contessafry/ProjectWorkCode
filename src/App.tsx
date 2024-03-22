@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 import "./App.css";
-import { getAllProducts } from "./APIcalls";
-import { Product } from "./declaration";
+import { AppContext } from "./Context";
 
 function App() {
-  const { products, setProducts } = useState<Product[] | []>([]);
-  useEffect(() => {
-    getAllProducts().then((res) => setProducts(res));
-  }, []);
+  const { products } = useContext(AppContext);
 
-  return <div>{products}</div>;
+  if (!products) return <div>Loading...</div>;
+  return (
+    <div>
+      {products.map(({ title, image }) => (
+        <div>
+          <img src={image}></img> <h1>{title}</h1>{" "}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default App;
