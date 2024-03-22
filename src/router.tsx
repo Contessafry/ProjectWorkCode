@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import PageProduct from "./pages/PageProduct";
+import PageProduct from "./pages/pageProduct";
 import PageDashboard from "./pages/PageDashBoard";
 import PageCheckout from "./pages/PageCheckout";
 import PageLogin from "./pages/PageLogin";
