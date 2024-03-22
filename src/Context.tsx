@@ -45,7 +45,8 @@ export function MainContext({ children }: PropsWithChildren) {
       );
   }
 
-  function logIn() {
+  function logIn({ email, password }: { email: string; password: string }) {
+    users.find((user) => user.email === email && user.password === password);
     localStorage.setItem("UserLogged", JSON.stringify(userLogged));
   }
 
