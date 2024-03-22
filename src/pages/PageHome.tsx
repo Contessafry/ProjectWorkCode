@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import "./App.css";
+
 import { AppContext } from "../Context";
 import { Grid } from "@mui/joy";
 import CardComp from "../components/Cards";

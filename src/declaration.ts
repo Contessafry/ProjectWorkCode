@@ -7,12 +7,12 @@ export interface Product {
   image: string;
 }
 
-export interface User{
-  id:number,
-  name:string,
-  email:string,
-  password?:string,
-  isAdmin:boolean
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  password?: string;
+  isAdmin: boolean;
 }
-
-export type Cart = [{product:Product,qty:number}]
+export type CartProduct = { product: Product; qty: number };
+export type Cart = CartProduct[];

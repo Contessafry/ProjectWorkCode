@@ -7,3 +7,12 @@ export async function getAllProducts() {
     console.error("Failed to fetch products:", error);
   }
 }
+export async function getAllUser() {
+  try {
+    const response = await fetch("http://localhost:1234/users");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+  }
+}
