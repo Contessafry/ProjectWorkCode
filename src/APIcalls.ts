@@ -1,6 +1,6 @@
 export async function getAllProducts() {
   try {
-    const response = await fetch("https://fakestoreapi.com/products");
+    const response = await fetch("http://localhost:1234/products");
     const data = await response.json();
     return data;
   } catch (error) {
