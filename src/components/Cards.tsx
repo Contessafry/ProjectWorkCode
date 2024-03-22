@@ -46,40 +46,51 @@ export default function CardComp({ product }: Props) {
             {price}€
           </Typography>
         </div>
-        {userLogged!.isAdmin && (
-          <>
-            <Button
-              variant="solid"
-              size="md"
-              aria-label="Explore Bahamas Islands"
-              sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-              color="warning"
-            >
-              Edit
-            </Button>
-            <Button
-              variant="solid"
-              size="md"
-              aria-label="Explore Bahamas Islands"
-              sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-              color="danger"
-            >
-              Delete
-            </Button>
-          </>
-        )}
-        {!userLogged!.isAdmin ||
-          (!userLogged && (
+
+        {!!userLogged ? (
+          userLogged.isAdmin ? (
+            <>
+              <Button
+                variant="solid"
+                size="md"
+                aria-label="Edit product"
+                sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+                color="warning"
+              >
+                Edit
+              </Button>
+              <Button
+                variant="solid"
+                size="md"
+                aria-label="Delete product"
+                sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+                color="danger"
+              >
+                Delete
+              </Button>
+            </>
+          ) : (
             <Button
               variant="solid"
               size="md"
               color="primary"
-              aria-label="Explore Bahamas Islands"
+              aria-label="Buy product"
               sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
             >
               Buy
             </Button>
-          ))}
+          )
+        ) : (
+          <Button
+            variant="solid"
+            size="md"
+            color="primary"
+            aria-label="Buy product"
+            sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+          >
+            Buy
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

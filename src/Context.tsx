@@ -7,23 +7,23 @@ interface AppContext {
   cart: Cart | [];
   users: User[];
   addItemToCart: (Product: Product) => void;
-  userLogged: User | null;
+  userLogged: User | { isAdmin: boolean };
   logIn: ({ email, password }: { email: string; password: string }) => void;
 }
 export const AppContext = createContext<AppContext>({
   products: [],
   cart: [],
   users: [],
-  userLogged: null,
+  userLogged: { isAdmin: false },
   addItemToCart: () => {},
   logIn: () => {},
 });
 
 export function MainContext({ children }: PropsWithChildren) {
-  const [userLogged, SetUserLogged] = useState<User | null>(
+  const [userLogged, SetUserLogged] = useState<User>(
     localStorage.getItem("UserLogged")
       ? JSON.parse(localStorage.getItem("UserLogged")!)
-      : null
+      : { isAdmin: false }
   );
   const [products, setProducts] = useState<Product[] | []>([]);
   const [cart, setCart] = useState<Cart | []>([]);
