@@ -1,11 +1,28 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./App";
+
+import PageProduct from "./pages/PageProduct";
+import PageDashboard from "./pages/PageDashBoard";
+import PageCheckout from "./pages/PageCheckout";
+import PageLogin from "./pages/PageLogin";
+import PageHome from "./pages/PageHome";
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<PageHome />} />
+        <Route path="/products/:productId" element={<PageProduct />} />
+        <Route path="/dashboard" element={<PageDashboard />} />
+        <Route path="/login" element={<PageLogin />} />
+        <Route path="/checkout" element={<PageCheckout />} />
+        <Route
+          path="*"
+          element={
+            <div>
+              Page not found <button>RETURN</button>
+            </div>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
