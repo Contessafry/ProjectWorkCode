@@ -7,8 +7,7 @@ import ListItemButton from '@mui/joy/ListItemButton';
 
 
 export default function navbar(){
-
-
+ 
     return(
        
         <Box component="nav" aria-label="My site" sx={{ flexGrow: 1 }}>
@@ -26,13 +25,13 @@ export default function navbar(){
                     <ListDivider />
                     <ListItem role="none">
                         <ListItemButton role="menuitem" component="a" href="#horizontal-list">
-                            Products
+                            Login 
                         </ListItemButton>
                     </ListItem>
                     <ListDivider />
                     <ListItem role="none">
                         <ListItemButton role="menuitem" component="a" href="#horizontal-list">
-                            Blog
+                            Cart
                         </ListItemButton>
                     </ListItem>
                    
