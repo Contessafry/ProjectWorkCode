@@ -1,9 +1,9 @@
 import { useContext } from "react";
 
 import "./App.css";
-import { AppContext } from "./Context";
+import { AppContext } from "../Context";
 
-function App() {
+function PageHome() {
   const { products } = useContext(AppContext);
 
   if (!products) return <div>Loading...</div>;
@@ -18,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+export default PageHome;
