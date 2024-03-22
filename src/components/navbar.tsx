@@ -7,8 +7,10 @@ import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
     <Box
       component="nav"
@@ -56,6 +58,7 @@ export default function Navbar() {
             component="a"
             href="#horizontal-list"
             sx={{ borderRadius: "10px" }}
+            onClick={() => navigate("/login")}
           >
             Login
           </ListItemButton>

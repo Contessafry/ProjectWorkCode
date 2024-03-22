@@ -8,8 +8,7 @@ interface AppContext {
   users: User[];
   addItemToCart: (Product: Product) => void;
   userLogged: User | null;
-  logIn: () => void;
-  checkAdmin: () => void;
+  logIn: ({ email, password }: { email: string; password: string }) => void;
 }
 export const AppContext = createContext<AppContext>({
   products: [],
@@ -18,11 +17,14 @@ export const AppContext = createContext<AppContext>({
   userLogged: null,
   addItemToCart: () => {},
   logIn: () => {},
-  checkAdmin: () => {},
 });
 
 export function MainContext({ children }: PropsWithChildren) {
-  const [userLogged, SetUserLogged] = useState<User | null>(null);
+  const [userLogged, SetUserLogged] = useState<User | null>(
+    localStorage.getItem("UserLogged")
+      ? JSON.parse(localStorage.getItem("UserLogged")!)
+      : null
+  );
   const [products, setProducts] = useState<Product[] | []>([]);
   const [cart, setCart] = useState<Cart | []>([]);
   const [users, setUsers] = useState<User[]>([]);
@@ -46,11 +48,14 @@ export function MainContext({ children }: PropsWithChildren) {
   }
 
   function logIn({ email, password }: { email: string; password: string }) {
-    users.find((user) => user.email === email && user.password === password);
-    localStorage.setItem("UserLogged", JSON.stringify(userLogged));
+    const logUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (!!logUser) {
+      SetUserLogged(logUser);
+      localStorage.setItem("UserLogged", JSON.stringify(logUser));
+    } else throw new Error("user not found");
   }
-
-  function checkAdmin() {}
 
   return (
     <AppContext.Provider
@@ -60,7 +65,6 @@ export function MainContext({ children }: PropsWithChildren) {
         users,
         addItemToCart,
         logIn,
-        checkAdmin,
         userLogged,
       }}
     >

@@ -6,17 +6,27 @@ import {
   Button,
   Card,
 } from "@mui/joy";
-import {} from "react";
+import { useContext } from "react";
 import { Product } from "../declaration";
+import { AppContext } from "../Context";
 
 interface Props {
   product: Product;
 }
 
 export default function CardComp({ product }: Props) {
-  const { title, price, category, description, image } = product;
+  const { userLogged } = useContext(AppContext);
+  const { title, price, category, image } = product;
   return (
-    <Card sx={{ width: 320, margin: "1em" }}>
+    <Card size="md" sx={{ width: 320, margin: "1em" }}>
+      <AspectRatio minHeight="120px" maxHeight="300px">
+        <img
+          src={image}
+          srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+          loading="lazy"
+          alt=""
+        />
+      </AspectRatio>
       <div>
         <Typography level="title-lg">{title}</Typography>
         <Typography level="body-sm">{category}</Typography>
@@ -28,15 +38,6 @@ export default function CardComp({ product }: Props) {
           sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
         ></IconButton>
       </div>
-      <AspectRatio minHeight="120px" maxHeight="200px">
-        <img
-          src={image}
-          srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
-          loading="lazy"
-          alt=""
-        />
-      </AspectRatio>
-      <Typography level="body-sm">{description}</Typography>
 
       <CardContent orientation="horizontal">
         <div>
@@ -45,15 +46,40 @@ export default function CardComp({ product }: Props) {
             {price}€
           </Typography>
         </div>
-        <Button
-          variant="solid"
-          size="md"
-          color="primary"
-          aria-label="Explore Bahamas Islands"
-          sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-        >
-          Buy
-        </Button>
+        {userLogged!.isAdmin && (
+          <>
+            <Button
+              variant="solid"
+              size="md"
+              aria-label="Explore Bahamas Islands"
+              sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+              color="warning"
+            >
+              Edit
+            </Button>
+            <Button
+              variant="solid"
+              size="md"
+              aria-label="Explore Bahamas Islands"
+              sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+              color="danger"
+            >
+              Delete
+            </Button>
+          </>
+        )}
+        {!userLogged!.isAdmin ||
+          (!userLogged && (
+            <Button
+              variant="solid"
+              size="md"
+              color="primary"
+              aria-label="Explore Bahamas Islands"
+              sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+            >
+              Buy
+            </Button>
+          ))}
       </CardContent>
     </Card>
   );

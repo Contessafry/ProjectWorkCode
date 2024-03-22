@@ -13,8 +13,8 @@ function PageHome() {
       <Navbar />
       <Grid
         container
-        spacing={3}
-        rowSpacing={1}
+        spacing={2}
+        rowSpacing={"none"}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         justifyContent={"space-evenly"}
       >
