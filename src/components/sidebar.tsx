@@ -1,4 +1,4 @@
-function sidebar () {
+/*function sidebar () {
 
     return(
         <div>
@@ -24,4 +24,33 @@ function sidebar () {
     
                     </div>
     )
-}
+}*/
+
+import { Input, Button } from "@mui/base";
+import { Stack } from "@mui/system";
+
+
+<form
+  onSubmit={(event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formJson = Object.fromEntries((formData as any).entries());
+    alert(JSON.stringify(formJson));
+  }}
+>
+  <Stack spacing={1}>
+    <Input placeholder="Title" required />
+    <Input placeholder="Price" required />
+    <Input placeholder="description" required />
+    <Input placeholder="image" required />
+    <select name="category" id="category"></select>
+    <Button type="submit">Submit</Button>
+  </Stack>
+</form>
+
+<TextField 
+        label="Email" 
+        type="email" 
+        placeholder="Inserisci la tua email" 
+      />
+
