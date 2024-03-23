@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
-import { getAllProducts, getAllUser } from "./APIcalls";
+import { addProduct, getAllProducts, getAllUser } from "./APIcalls";
 import { Cart, Product, User } from "./declaration";
 
 interface AppContext {
@@ -7,23 +7,27 @@ interface AppContext {
   cart: Cart | [];
   users: User[];
   addItemToCart: (Product: Product) => void;
-  userLogged: User | { isAdmin: boolean };
+  userLogged: User;
   logIn: ({ email, password }: { email: string; password: string }) => void;
+  logOut: () => void;
+  adminPostProduct: (product: Product) => void;
 }
 export const AppContext = createContext<AppContext>({
   products: [],
   cart: [],
   users: [],
-  userLogged: { isAdmin: false },
+  userLogged: { id: 0, name: "", email: "", isAdmin: false },
   addItemToCart: () => {},
   logIn: () => {},
+  logOut: () => {},
+  adminPostProduct: () => {},
 });
 
 export function MainContext({ children }: PropsWithChildren) {
   const [userLogged, SetUserLogged] = useState<User>(
     localStorage.getItem("UserLogged")
       ? JSON.parse(localStorage.getItem("UserLogged")!)
-      : { isAdmin: false }
+      : { id: 0, name: "", email: "", isAdmin: false }
   );
   const [products, setProducts] = useState<Product[] | []>([]);
   const [cart, setCart] = useState<Cart | []>([]);
@@ -36,6 +40,25 @@ export function MainContext({ children }: PropsWithChildren) {
     getAllUser().then((res) => setUsers(res));
   }, []);
 
+  //ALL
+  function logIn({ email, password }: { email: string; password: string }) {
+    const logUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (!!logUser) {
+      SetUserLogged(logUser);
+      localStorage.setItem("UserLogged", JSON.stringify(logUser));
+    } else throw new Error("user not found");
+  }
+  function logOut() {
+    SetUserLogged({ id: 0, name: "", email: "", isAdmin: false });
+    localStorage.removeItem("UserLogged");
+  }
+  //ADMIN
+  function adminPostProduct(product: Product) {
+    addProduct(product).then((res) => setProducts([...products, res]));
+  }
+  //USER
   function addItemToCart(product: Product) {
     const isOnCart = cart.find((item) => item.product.id === product.id);
     if (product && !isOnCart) setCart([...cart, { product, qty: 1 }]);
@@ -46,17 +69,6 @@ export function MainContext({ children }: PropsWithChildren) {
         )
       );
   }
-
-  function logIn({ email, password }: { email: string; password: string }) {
-    const logUser = users.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (!!logUser) {
-      SetUserLogged(logUser);
-      localStorage.setItem("UserLogged", JSON.stringify(logUser));
-    } else throw new Error("user not found");
-  }
-
   return (
     <AppContext.Provider
       value={{
@@ -65,7 +77,9 @@ export function MainContext({ children }: PropsWithChildren) {
         users,
         addItemToCart,
         logIn,
+        logOut,
         userLogged,
+        adminPostProduct,
       }}
     >
       {children}

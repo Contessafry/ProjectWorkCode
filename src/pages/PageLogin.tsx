@@ -37,7 +37,7 @@ export default function PageLogin() {
           onClick={() => {
             logIn({ email, password });
             if (!!userLogged) {
-              navigate("/dashboard");
+              navigate("/dashboard"); //admin => dashboard user => home
             }
           }}
         >

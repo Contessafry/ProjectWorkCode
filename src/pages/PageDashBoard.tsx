@@ -25,8 +25,9 @@ export default function PageDashboard() {
           height={"100vh"}
           justifyContent="center"
           alignItems="center"
-          gap={1}
           p={2}
+          flexDirection={"column"}
+          gap={2}
           sx={{
             [theme.breakpoints.down("sm")]: {
               width: "100%",
