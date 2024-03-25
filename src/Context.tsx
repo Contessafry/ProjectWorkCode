@@ -13,6 +13,7 @@ interface AppContext {
   cart: Cart | [];
   users: User[];
   addItemToCart: (Product: Product) => void;
+  checkOut: () => void;
   userLogged: User;
   logIn: ({ email, password }: { email: string; password: string }) => void;
   logOut: () => void;
@@ -26,6 +27,7 @@ export const AppContext = createContext<AppContext>({
   users: [],
   userLogged: { id: 0, name: "", email: "", isAdmin: false },
   addItemToCart: () => {},
+  checkOut: () => {},
   logIn: () => {},
   logOut: () => {},
   adminPostProduct: () => {},
@@ -80,6 +82,8 @@ export function MainContext({ children }: PropsWithChildren) {
       )
     );
   }
+
+  function onSearch() {}
   //USER
   function addItemToCart(product: Product) {
     const isOnCart = cart.find((item) => item.product.id === product.id);
@@ -93,6 +97,9 @@ export function MainContext({ children }: PropsWithChildren) {
         )
       );
   }
+  function checkOut() {
+    setCart([]);
+  }
 
   return (
     <AppContext.Provider
@@ -101,6 +108,7 @@ export function MainContext({ children }: PropsWithChildren) {
         cart,
         users,
         addItemToCart,
+        checkOut,
         logIn,
         logOut,
         userLogged,

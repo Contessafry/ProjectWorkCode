@@ -32,6 +32,7 @@ export default function Navbar() {
             component="a"
             href="#horizontal-list"
             aria-label="Home"
+            onClick={() => navigate("/")}
           >
             <ListItemDecorator>
               <Home />

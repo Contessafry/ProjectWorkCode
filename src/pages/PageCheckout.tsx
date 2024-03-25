@@ -1,8 +1,11 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../Context";
 
 export default function PageCheckout() {
+  const { checkOut } = useContext(AppContext);
   const Navigate = useNavigate();
   return (
     <>
@@ -62,9 +65,12 @@ export default function PageCheckout() {
           type="submit"
           variant="contained"
           color="success"
-          onClick={() => Navigate("/checkout/success")}
+          onClick={() => {
+            checkOut();
+            Navigate("/checkout/success");
+          }}
         >
-          Pagami
+          Payment
         </Button>
       </Grid>
     </>

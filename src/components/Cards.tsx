@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { Product } from "../declaration";
 import { AppContext } from "../Context";
 import EditModal from "./EditModal";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   product: Product;
@@ -22,25 +23,27 @@ export default function CardComp({ product }: Props) {
 
   return (
     <Card size="md" sx={{ width: 320, margin: "1em" }}>
-      <AspectRatio minHeight="120px" maxHeight="300px">
-        <img
-          src={image}
-          srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
-          loading="lazy"
-          alt=""
-        />
-      </AspectRatio>
-      <div>
+      <NavLink to={`/products/${product.id}`}>
+        <AspectRatio minHeight="120px" maxHeight="300px">
+          <img
+            src={image}
+            srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+            loading="lazy"
+            alt=""
+          />
+        </AspectRatio>
+
         <Typography level="title-lg">{title}</Typography>
         <Typography level="body-sm">{category}</Typography>
-        <IconButton
-          aria-label="bookmark Bahamas Islands"
-          variant="plain"
-          color="neutral"
-          size="sm"
-          sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
-        ></IconButton>
-      </div>
+      </NavLink>
+
+      <IconButton
+        aria-label="bookmark Bahamas Islands"
+        variant="plain"
+        color="neutral"
+        size="sm"
+        sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
+      ></IconButton>
 
       <CardContent orientation="horizontal">
         <div>
