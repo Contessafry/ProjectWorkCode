@@ -18,6 +18,7 @@ interface AppContext {
   logOut: () => void;
   adminPostProduct: (product: Product) => void;
   adminDeleteProduct: (productId: Product["id"]) => void;
+  adminEditProduct: (product: Product) => void;
 }
 export const AppContext = createContext<AppContext>({
   products: [],
@@ -29,6 +30,7 @@ export const AppContext = createContext<AppContext>({
   logOut: () => {},
   adminPostProduct: () => {},
   adminDeleteProduct: () => {},
+  adminEditProduct: () => {},
 });
 
 export function MainContext({ children }: PropsWithChildren) {
@@ -64,24 +66,30 @@ export function MainContext({ children }: PropsWithChildren) {
   }
   //ADMIN
   function adminPostProduct(product: Product) {
-    addProduct(product).then((res) => setProducts([...products, res]));
+    addProduct(product).then((res) => setProducts([res, ...products]));
   }
   function adminDeleteProduct(productId: Product["id"]) {
     deleteProduct(productId);
     setProducts(products.filter((product) => product.id !== productId));
   }
-  function adminEditProduct(productId: Product["id"]) {
-    editProduct(productId);
-    setProducts(products.filter((product) => product.id !== productId));
+  function adminEditProduct(productEdited: Product) {
+    editProduct(productEdited);
+    setProducts(
+      products.map((product) =>
+        product.id === productEdited.id ? productEdited : product
+      )
+    );
   }
   //USER
   function addItemToCart(product: Product) {
     const isOnCart = cart.find((item) => item.product.id === product.id);
-    if (product && !isOnCart) setCart([...cart, { product, qty: 1 }]);
+    if (!isOnCart) setCart([...cart, { product, qty: 1 }]);
     else
       setCart(
-        cart.map((item) =>
-          item.product.id === product.id ? { ...item, qty: item.qty + 1 } : item
+        cart.map((productOncart) =>
+          productOncart.product.id === product.id
+            ? { ...productOncart, qty: productOncart.qty + 1 }
+            : productOncart
         )
       );
   }
@@ -98,6 +106,7 @@ export function MainContext({ children }: PropsWithChildren) {
         userLogged,
         adminPostProduct,
         adminDeleteProduct,
+        adminEditProduct,
       }}
     >
       {children}

@@ -6,7 +6,6 @@ import {
   Routes,
 } from "react-router-dom";
 
-import PageProduct from "./pages/PageProduct";
 import PageDashboard from "./pages/PageDashBoard";
 import PageCheckout from "./pages/PageCheckout";
 import PageLogin from "./pages/PageLogin";
@@ -15,6 +14,7 @@ import { AppContext } from "./Context";
 import { useContext } from "react";
 
 import Layout from "./components/Layout";
+import PageProduct from "./pages/PageProduct";
 
 function DashLock({ isAuthenticated }: { isAuthenticated: boolean }) {
   return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;

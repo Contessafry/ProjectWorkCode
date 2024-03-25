@@ -9,4 +9,4 @@ function PageProduct() {
   );
 }
 
-export default PageProduct
+export default PageProduct;

@@ -51,16 +51,8 @@ export default function CardComp({ product }: Props) {
         {!!userLogged ? (
           userLogged.isAdmin ? (
             <>
-              <EditModal />
-              <Button
-                variant="solid"
-                size="md"
-                aria-label="Edit product"
-                sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-                color="warning"
-              >
-                Edit
-              </Button>
+              <EditModal product={product} />
+
               <Button
                 variant="solid"
                 size="md"

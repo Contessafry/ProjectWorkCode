@@ -1,8 +1,11 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import { Button } from "@mui/joy";
+
+import { Modal } from "@mui/material";
+
+import { useState } from "react";
+import { Product } from "../declaration";
+import FormForProduct from "./FormForProduct";
 
 const style = {
   position: "absolute",
@@ -16,13 +19,22 @@ const style = {
   p: 4,
 };
 
-function EditModal() {
-  const [open, setOpen] = React.useState(false);
+function EditModal({ product }: { product: Product }) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button
+        variant="solid"
+        size="md"
+        aria-label="Edit product"
+        sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+        color="warning"
+        onClick={handleOpen}
+      >
+        Edit
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -30,12 +42,7 @@ function EditModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <FormForProduct product={product} closeModal={handleClose} />
         </Box>
       </Modal>
     </>
