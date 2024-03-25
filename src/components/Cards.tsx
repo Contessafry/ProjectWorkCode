@@ -1,7 +1,8 @@
 import {} from "react";
+import { Product } from "../declaration";
 
 interface Props {
-  product: Any;
+  product: Product;
 }
 
 export default function Card({ product }: Props) {
