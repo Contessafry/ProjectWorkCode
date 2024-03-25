@@ -1,5 +1,11 @@
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
-import { addProduct, getAllProducts, getAllUser } from "./APIcalls";
+import {
+  addProduct,
+  deleteProduct,
+  editProduct,
+  getAllProducts,
+  getAllUser,
+} from "./APIcalls";
 import { Cart, Product, User } from "./declaration";
 
 interface AppContext {
@@ -11,6 +17,7 @@ interface AppContext {
   logIn: ({ email, password }: { email: string; password: string }) => void;
   logOut: () => void;
   adminPostProduct: (product: Product) => void;
+  adminDeleteProduct: (productId: Product["id"]) => void;
 }
 export const AppContext = createContext<AppContext>({
   products: [],
@@ -21,6 +28,7 @@ export const AppContext = createContext<AppContext>({
   logIn: () => {},
   logOut: () => {},
   adminPostProduct: () => {},
+  adminDeleteProduct: () => {},
 });
 
 export function MainContext({ children }: PropsWithChildren) {
@@ -58,6 +66,14 @@ export function MainContext({ children }: PropsWithChildren) {
   function adminPostProduct(product: Product) {
     addProduct(product).then((res) => setProducts([...products, res]));
   }
+  function adminDeleteProduct(productId: Product["id"]) {
+    deleteProduct(productId);
+    setProducts(products.filter((product) => product.id !== productId));
+  }
+  function adminEditProduct(productId: Product["id"]) {
+    editProduct(productId);
+    setProducts(products.filter((product) => product.id !== productId));
+  }
   //USER
   function addItemToCart(product: Product) {
     const isOnCart = cart.find((item) => item.product.id === product.id);
@@ -69,6 +85,7 @@ export function MainContext({ children }: PropsWithChildren) {
         )
       );
   }
+
   return (
     <AppContext.Provider
       value={{
@@ -80,6 +97,7 @@ export function MainContext({ children }: PropsWithChildren) {
         logOut,
         userLogged,
         adminPostProduct,
+        adminDeleteProduct,
       }}
     >
       {children}

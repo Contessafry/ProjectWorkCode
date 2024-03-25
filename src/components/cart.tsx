@@ -55,7 +55,8 @@ function Cart() {
           <Divider />
           <List>
             <ListItem>
-              Total:{cart.reduce((acc, Product) => acc + Product.product.price, 0)}
+              Total:
+              {cart.reduce((acc, Product) => acc + Product.product.price, 0)}
               <ListItemButton>Checkout</ListItemButton>
             </ListItem>
           </List>

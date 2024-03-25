@@ -9,13 +9,14 @@ import {
 import { useContext } from "react";
 import { Product } from "../declaration";
 import { AppContext } from "../Context";
+import EditModal from "./EditModal";
 
 interface Props {
   product: Product;
 }
 
 export default function CardComp({ product }: Props) {
-  const { userLogged } = useContext(AppContext);
+  const { userLogged, adminDeleteProduct } = useContext(AppContext);
   const { title, price, category, image } = product;
   return (
     <Card size="md" sx={{ width: 320, margin: "1em" }}>
@@ -50,6 +51,7 @@ export default function CardComp({ product }: Props) {
         {!!userLogged ? (
           userLogged.isAdmin ? (
             <>
+              <EditModal />
               <Button
                 variant="solid"
                 size="md"
@@ -65,6 +67,7 @@ export default function CardComp({ product }: Props) {
                 aria-label="Delete product"
                 sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
                 color="danger"
+                onClick={() => adminDeleteProduct(product.id)}
               >
                 Delete
               </Button>

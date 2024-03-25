@@ -1,8 +1,12 @@
-function PageProduct (){
+import NavBar from "../components/NavBar";
 
- return(   <div>
-        <h1>title</h1>
-    </div>)
+function PageProduct() {
+  return (
+    <>
+      <NavBar />
+      <div>ProductPage</div>
+    </>
+  );
 }
 
 export default PageProduct
