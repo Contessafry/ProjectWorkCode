@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useContext } from "react";
 import { AppContext } from "../Context";
 
-function PageProduct() {+
+function PageProduct() {
   const { productId } = useParams();
   const { products } = useContext(AppContext);
   const productFound = products.find((product) => product.id === productId);
