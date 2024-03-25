@@ -1,5 +1,11 @@
 import { Home } from "@mui/icons-material";
-import { Button, Input, ListItemContent, ListItemDecorator } from "@mui/joy";
+import {
+  Button,
+  Input,
+  ListItemContent,
+  ListItemDecorator,
+  useTheme,
+} from "@mui/joy";
 import Box from "@mui/joy/Box";
 import List from "@mui/joy/List";
 import ListDivider from "@mui/joy/ListDivider";
@@ -12,11 +18,19 @@ import Cart from "./cart";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const theme = useTheme();
   return (
     <Box
+      display={"flex"}
       component="nav"
       aria-label="My site"
-      sx={{ width: "100%", flexGrow: 1 }}
+      sx={{
+        width: "100%",
+        flexGrow: 1,
+        position: "sticky",
+        top: 0,
+        zIndex: "1000",
+      }}
       marginBottom={3}
     >
       <List
@@ -43,7 +57,12 @@ export default function Navbar() {
 
         <Input
           size="lg"
-          sx={{ width: 1300 }}
+          sx={{
+            width: 1300,
+            [theme.breakpoints.down("sm")]: {
+              display: "none",
+            },
+          }}
           color="primary"
           variant="outlined"
           placeholder="Type in here…"
