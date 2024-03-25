@@ -15,6 +15,7 @@ import { AppContext } from "./Context";
 import { useContext } from "react";
 
 import Layout from "./components/Layout";
+import PageCheckoutSuccess from "./pages/PageCheckoutSuccess";
 
 function DashLock({ isAuthenticated }: { isAuthenticated: boolean }) {
   return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
@@ -32,6 +33,7 @@ function AppRouter() {
           </Route>
           <Route path="/login" element={<PageLogin />} />
           <Route path="/checkout" element={<PageCheckout />} />
+          <Route path="/checkout/success" element={<PageCheckoutSuccess />} />
           <Route
             path="*"
             element={

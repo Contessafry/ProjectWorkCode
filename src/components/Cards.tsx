@@ -16,8 +16,10 @@ interface Props {
 }
 
 export default function CardComp({ product }: Props) {
-  const { userLogged, adminDeleteProduct } = useContext(AppContext);
+  const { userLogged, adminDeleteProduct, addItemToCart } =
+    useContext(AppContext);
   const { title, price, category, image } = product;
+
   return (
     <Card size="md" sx={{ width: 320, margin: "1em" }}>
       <AspectRatio minHeight="120px" maxHeight="300px">
@@ -79,6 +81,7 @@ export default function CardComp({ product }: Props) {
               color="primary"
               aria-label="Buy product"
               sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+              onClick={() => addItemToCart(product)}
             >
               Buy
             </Button>
@@ -90,6 +93,7 @@ export default function CardComp({ product }: Props) {
             color="primary"
             aria-label="Buy product"
             sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+            onClick={() => alert("Per favore, effettua il login")}
           >
             Buy
           </Button>

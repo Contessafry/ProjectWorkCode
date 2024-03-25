@@ -77,7 +77,7 @@ export function MainContext({ children }: PropsWithChildren) {
   //USER
   function addItemToCart(product: Product) {
     const isOnCart = cart.find((item) => item.product.id === product.id);
-    if (product && !isOnCart) setCart([...cart, { product, qty: 1 }]);
+    if (!isOnCart) setCart([...cart, { product, qty: 1 }]);
     else
       setCart(
         cart.map((item) =>

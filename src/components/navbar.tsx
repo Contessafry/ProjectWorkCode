@@ -1,4 +1,4 @@
-import { Home, KeyboardArrowRight } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import { Button, Input, ListItemContent, ListItemDecorator } from "@mui/joy";
 import Box from "@mui/joy/Box";
 import List from "@mui/joy/List";
@@ -78,8 +78,7 @@ export default function Navbar() {
           <List>
             <ListItem>
               <ListItemButton>
-               <Cart/>
-                <KeyboardArrowRight color="primary" />
+                <Cart />
               </ListItemButton>
             </ListItem>
           </List>
