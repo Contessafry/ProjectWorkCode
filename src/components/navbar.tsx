@@ -6,8 +6,9 @@ import ListDivider from "@mui/joy/ListDivider";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
 import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import { useNavigate } from "react-router-dom";
+import Cart from "./cart";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -77,9 +78,7 @@ export default function Navbar() {
           <List>
             <ListItem>
               <ListItemButton>
-                <ListItemContent>
-                  <ShoppingCartIcon color="primary"></ShoppingCartIcon>
-                </ListItemContent>
+               <Cart/>
                 <KeyboardArrowRight color="primary" />
               </ListItemButton>
             </ListItem>
