@@ -6,10 +6,10 @@ import List from "@mui/joy/List";
 import Divider from "@mui/joy/Divider";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
-import { AppContext, AppContextType } from "../services/MainContext";
+import { AppContext } from "../Context";
 
 function Cart() {
-  const { cart }: AppContextType = useContext(AppContext);
+  const { cart } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer =
@@ -46,14 +46,14 @@ function Cart() {
           <Divider />
           <List>
             {cart.map((product) => (
-              <ListItem key={product.id}>
+              <ListItem key={product.product.id}>
                 <ListItemButton>
                   <img
                     style={{ width: "100px" }}
-                    src={product.previewUrl}
-                    alt={product.title}
+                    src={product.product.image}
+                    alt={product.product.title}
                   />
-                  {product.title}
+                  {product.product.title}
                 </ListItemButton>
               </ListItem>
             ))}
@@ -61,7 +61,8 @@ function Cart() {
           <Divider />
           <List>
             <ListItem>
-              Total:{cart.reduce((acc, Product) => acc + Product.price, 0)}
+              Total:
+              {cart.reduce((acc, Product) => acc + Product.product.price, 0)}
               <ListItemButton>Checkout</ListItemButton>
             </ListItem>
           </List>
@@ -71,4 +72,4 @@ function Cart() {
   );
 }
 
-export default CartDrawer;
+export default Cart;
