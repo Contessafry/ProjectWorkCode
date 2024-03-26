@@ -125,7 +125,8 @@ export function MainContext({ children }: PropsWithChildren) {
           product.title.toLowerCase().includes(ToSearch.toLowerCase())
         )
       );
-    } else {
+    }
+    if (ToSearch.length === 1) {
       getAllProducts().then((res) => setProducts(res));
     }
   }
