@@ -1,11 +1,5 @@
 import { Home } from "@mui/icons-material";
-import {
-  Button,
-  Input,
-  ListItemContent,
-  ListItemDecorator,
-  useTheme,
-} from "@mui/joy";
+import { Input, ListItemContent, ListItemDecorator, useTheme } from "@mui/joy";
 import Box from "@mui/joy/Box";
 import List from "@mui/joy/List";
 import ListDivider from "@mui/joy/ListDivider";
@@ -61,7 +55,10 @@ export default function Navbar() {
 
         <Input
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            onSearch(search);
+          }}
           size="lg"
           sx={{
             width: 1300,
@@ -72,9 +69,7 @@ export default function Navbar() {
           color="primary"
           variant="outlined"
           placeholder="Type in here…"
-          endDecorator={
-            <Button onClick={() => onSearch(search)}>{<SearchIcon />}</Button>
-          }
+          endDecorator={<SearchIcon />}
         />
 
         <ListDivider />

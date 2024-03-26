@@ -5,8 +5,10 @@ import {
   CardContent,
   Button,
   Card,
+  CardOverflow,
+  Snackbar,
 } from "@mui/joy";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Product } from "../declaration";
 import { AppContext } from "../Context";
 import EditModal from "./EditModal";
@@ -20,20 +22,20 @@ export default function CardComp({ product }: Props) {
   const { userLogged, adminDeleteProduct, addItemToCart } =
     useContext(AppContext);
   const { title, price, category, image } = product;
-
+  const [snackOpen, setSnackOpen] = useState(false);
   return (
-    <Card size="md" sx={{ width: 320, margin: "1em" }}>
+    <Card size="md" sx={{ width: 360, margin: "1em" }}>
       <NavLink to={`/products/${product.id}`}>
-        <AspectRatio minHeight="120px" maxHeight="300px">
-          <img
-            //  style={}
-            //srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
-            src={image}
-            loading="lazy"
-            alt=""
-          />
-        </AspectRatio>
-
+        <CardOverflow>
+          <AspectRatio minHeight="120px" maxHeight="300px">
+            <img
+              //srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+              src={image}
+              loading="lazy"
+              alt=""
+            />
+          </AspectRatio>
+        </CardOverflow>
         <Typography level="title-lg">{title}</Typography>
         <Typography level="body-sm">{category}</Typography>
       </NavLink>
@@ -77,7 +79,10 @@ export default function CardComp({ product }: Props) {
               color="primary"
               aria-label="Buy product"
               sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-              onClick={() => addItemToCart(product)}
+              onClick={() => {
+                addItemToCart(product);
+                setSnackOpen(true);
+              }}
             >
               Buy
             </Button>
@@ -95,19 +100,20 @@ export default function CardComp({ product }: Props) {
           </Button>
         )}
       </CardContent>
-      {/* <Snackbar
-        autoHideDuration={3000}
-        open={open}
-        variant={variant}
-        onClose={(event, reason) => {
+      <Snackbar
+        autoHideDuration={2000}
+        open={snackOpen}
+        color="success"
+        onClose={(e, reason) => {
+          e;
           if (reason === "clickaway") {
             return;
           }
-          setOpen(false);
+          setSnackOpen(false);
         }}
       >
-        {product.title} added to cart
-      </Snackbar> */}
+        <> {product.title} added to cart</>
+      </Snackbar>
     </Card>
   );
 }
