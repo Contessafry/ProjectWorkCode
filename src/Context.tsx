@@ -1,20 +1,25 @@
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
 import {
+  addOrder,
   addProduct,
   deleteProduct,
   editProduct,
+  getAllOrders,
   getAllProducts,
   getAllUser,
 } from "./APIcalls";
-import { Cart, CartProduct, Product, User } from "./declaration";
+import { Cart, CartProduct, Order, Product, User } from "./declaration";
+import { v4 as uuid } from "uuid";
 
 interface AppContext {
   products: Product[] | [];
   cart: Cart | [];
   users: User[];
+  orders: Order[];
   addItemToCart: (Product: Product) => void;
   removeItemFromCart: (Product: CartProduct) => void;
   checkOut: () => void;
+  clearCart: () => void;
   userLogged: User;
   logIn: ({ email, password }: { email: string; password: string }) => void;
   logOut: () => void;
@@ -27,10 +32,13 @@ export const AppContext = createContext<AppContext>({
   products: [],
   cart: [],
   users: [],
+  orders: [],
   userLogged: { id: 0, name: "", email: "", isAdmin: false },
   addItemToCart: () => {},
   removeItemFromCart: () => {},
+
   checkOut: () => {},
+  clearCart: () => {},
   logIn: () => {},
   logOut: () => {},
   adminPostProduct: () => {},
@@ -48,12 +56,16 @@ export function MainContext({ children }: PropsWithChildren) {
   const [products, setProducts] = useState<Product[] | []>([]);
   const [cart, setCart] = useState<Cart | []>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     getAllProducts().then((res) => setProducts(res));
   }, []);
   useEffect(() => {
     getAllUser().then((res) => setUsers(res));
+  }, []);
+  useEffect(() => {
+    getAllOrders().then((res) => setOrders(res));
   }, []);
 
   //ALL
@@ -131,6 +143,17 @@ export function MainContext({ children }: PropsWithChildren) {
     }
   }
   function checkOut() {
+    const order = {
+      id: uuid(),
+      buyed: cart,
+      date: new Date(),
+    };
+    if (order.buyed.length > 0)
+      addOrder(order).then((res) => setOrders([...orders, res]));
+
+    clearCart();
+  }
+  function clearCart() {
     setCart([]);
   }
 
@@ -140,8 +163,10 @@ export function MainContext({ children }: PropsWithChildren) {
         products,
         cart,
         users,
+        orders,
         addItemToCart,
         removeItemFromCart,
+        clearCart,
         checkOut,
         logIn,
         logOut,

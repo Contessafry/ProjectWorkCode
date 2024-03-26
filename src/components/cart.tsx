@@ -25,7 +25,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }));
 
 function Cart() {
-  const { cart, removeItemFromCart, checkOut } = useContext(AppContext);
+  const { cart, removeItemFromCart, clearCart } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer =
@@ -102,7 +102,7 @@ function Cart() {
                 )}
                 €
               </div>
-              <Button onClick={checkOut} color="danger">
+              <Button onClick={clearCart} color="danger">
                 Clear
               </Button>
               <Link to="/checkout">
