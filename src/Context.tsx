@@ -20,6 +20,7 @@ interface AppContext {
   adminPostProduct: (product: Product) => void;
   adminDeleteProduct: (productId: Product["id"]) => void;
   adminEditProduct: (product: Product) => void;
+  onSearch: (ToSearch: string) => void;
 }
 export const AppContext = createContext<AppContext>({
   products: [],
@@ -33,6 +34,7 @@ export const AppContext = createContext<AppContext>({
   adminPostProduct: () => {},
   adminDeleteProduct: () => {},
   adminEditProduct: () => {},
+  onSearch: () => {},
 });
 
 export function MainContext({ children }: PropsWithChildren) {
@@ -83,7 +85,6 @@ export function MainContext({ children }: PropsWithChildren) {
     );
   }
 
-  function onSearch() {}
   //USER
   function addItemToCart(product: Product) {
     const isOnCart = cart.find((item) => item.product.id === product.id);
@@ -96,6 +97,17 @@ export function MainContext({ children }: PropsWithChildren) {
             : productOncart
         )
       );
+  }
+  function onSearch(ToSearch: string) {
+    if (!!ToSearch) {
+      setProducts(
+        products.filter((product) =>
+          product.title.toLowerCase().includes(ToSearch.toLowerCase())
+        )
+      );
+    } else {
+      getAllProducts().then((res) => setProducts(res));
+    }
   }
   function checkOut() {
     setCart([]);
@@ -115,6 +127,7 @@ export function MainContext({ children }: PropsWithChildren) {
         adminPostProduct,
         adminDeleteProduct,
         adminEditProduct,
+        onSearch,
       }}
     >
       {children}

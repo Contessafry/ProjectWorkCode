@@ -15,10 +15,14 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { useNavigate } from "react-router-dom";
 import Cart from "./cart";
+import { useContext, useState } from "react";
+import { AppContext } from "../Context";
 
 export default function Navbar() {
+  const { onSearch } = useContext(AppContext);
   const navigate = useNavigate();
   const theme = useTheme();
+  const [search, setSearch] = useState("");
   return (
     <Box
       display={"flex"}
@@ -56,6 +60,8 @@ export default function Navbar() {
         </ListItem>
 
         <Input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           size="lg"
           sx={{
             width: 1300,
@@ -66,7 +72,9 @@ export default function Navbar() {
           color="primary"
           variant="outlined"
           placeholder="Type in here…"
-          endDecorator={<Button>{<SearchIcon />}</Button>}
+          endDecorator={
+            <Button onClick={() => onSearch(search)}>{<SearchIcon />}</Button>
+          }
         />
 
         <ListDivider />

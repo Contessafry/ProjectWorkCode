@@ -26,8 +26,9 @@ export default function CardComp({ product }: Props) {
       <NavLink to={`/products/${product.id}`}>
         <AspectRatio minHeight="120px" maxHeight="300px">
           <img
+            //  style={}
+            //srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
             src={image}
-            srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
             loading="lazy"
             alt=""
           />
@@ -94,6 +95,19 @@ export default function CardComp({ product }: Props) {
           </Button>
         )}
       </CardContent>
+      {/* <Snackbar
+        autoHideDuration={3000}
+        open={open}
+        variant={variant}
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
+          setOpen(false);
+        }}
+      >
+        {product.title} added to cart
+      </Snackbar> */}
     </Card>
   );
 }
