@@ -95,7 +95,7 @@ function Cart() {
               }}
             >
               Total:
-              <div style={{ marginLeft: "3px", marginRight: "140px" }}>
+              <div style={{ marginLeft: "3px", marginRight: "130px" }}>
                 {cart.reduce(
                   (acc, product) => acc + product.product.price * product.qty,
                   0
