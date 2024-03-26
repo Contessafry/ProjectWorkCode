@@ -16,3 +16,5 @@ export interface User {
 }
 export type CartProduct = { product: Product; qty: number };
 export type Cart = CartProduct[];
+
+export type Order = { id: string; buyed: CartProduct[]; date: Date };

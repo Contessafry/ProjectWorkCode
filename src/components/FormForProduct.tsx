@@ -62,6 +62,7 @@ function FormForProduct({
 
     if (isNew) {
       adminPostProduct({ ...formState, id: uuid() });
+      dispatch({ type: "RESET" });
     } else {
       adminEditProduct({ ...formState, id: product.id });
       closeModal();

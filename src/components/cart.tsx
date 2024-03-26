@@ -5,7 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import List from "@mui/joy/List";
 import Divider from "@mui/joy/Divider";
 import ListItem from "@mui/joy/ListItem";
-import ListItemButton from "@mui/joy/ListItemButton";
+
 import { AppContext } from "../Context";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import Button from "@mui/joy/Button";
@@ -25,7 +25,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }));
 
 function Cart() {
-  const { cart, removeItemFromCart, checkOut } = useContext(AppContext);
+  const { cart, removeItemFromCart, clearCart } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer =
@@ -102,7 +102,7 @@ function Cart() {
                 )}
                 €
               </div>
-              <Button onClick={checkOut} color="danger">
+              <Button onClick={clearCart} color="danger">
                 Clear
               </Button>
               <Link to="/checkout">
