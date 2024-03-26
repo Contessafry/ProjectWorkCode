@@ -6,13 +6,14 @@ import {
   getAllProducts,
   getAllUser,
 } from "./APIcalls";
-import { Cart, Product, User } from "./declaration";
+import { Cart, CartProduct, Product, User } from "./declaration";
 
 interface AppContext {
   products: Product[] | [];
   cart: Cart | [];
   users: User[];
   addItemToCart: (Product: Product) => void;
+  removeItemFromCart: (Product: CartProduct) => void;
   checkOut: () => void;
   userLogged: User;
   logIn: ({ email, password }: { email: string; password: string }) => void;
@@ -28,6 +29,7 @@ export const AppContext = createContext<AppContext>({
   users: [],
   userLogged: { id: 0, name: "", email: "", isAdmin: false },
   addItemToCart: () => {},
+  removeItemFromCart: () => {},
   checkOut: () => {},
   logIn: () => {},
   logOut: () => {},
@@ -98,6 +100,24 @@ export function MainContext({ children }: PropsWithChildren) {
         )
       );
   }
+  function removeItemFromCart(product: CartProduct) {
+    if (!product) return;
+    if (product.qty > 1)
+      setCart(
+        cart.map((productOncart) =>
+          product === productOncart
+            ? { ...productOncart, qty: productOncart.qty - 1 }
+            : productOncart
+        )
+      );
+
+    if (product.qty === 1)
+      setCart(
+        cart.filter(
+          (productOncart) => productOncart.product.id !== product.product.id
+        )
+      );
+  }
   function onSearch(ToSearch: string) {
     if (!!ToSearch) {
       setProducts(
@@ -120,6 +140,7 @@ export function MainContext({ children }: PropsWithChildren) {
         cart,
         users,
         addItemToCart,
+        removeItemFromCart,
         checkOut,
         logIn,
         logOut,

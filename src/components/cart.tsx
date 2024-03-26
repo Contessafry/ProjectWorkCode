@@ -25,7 +25,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }));
 
 function Cart() {
-  const { cart } = useContext(AppContext);
+  const { cart, removeItemFromCart, checkOut } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer =
@@ -60,25 +60,51 @@ function Cart() {
           <List>
             {cart.map((product) => (
               <ListItem key={product.product.id}>
-                <ListItemButton>
-                  <img
-                    style={{ width: "100px" }}
-                    src={product.product.image}
-                    alt={product.product.title}
-                  />
-                  {product.product.title} {product.qty}
-                </ListItemButton>
+                <img
+                  style={{ width: "100px" }}
+                  src={product.product.image}
+                  alt={product.product.title}
+                />
+                <div>
+                  <div>{product.product.title} </div>
+
+                  <div style={{ fontWeight: "bold" }}>
+                    {product.product.price}€
+                    <Button
+                      color="danger"
+                      variant="plain"
+                      style={{ marginLeft: "100px" }}
+                      onClick={(e) => {
+                        removeItemFromCart(product);
+                        e.stopPropagation();
+                      }}
+                    >
+                      remove
+                    </Button>
+                    <div>Quantity: {product.qty}</div>
+                  </div>
+                </div>
               </ListItem>
             ))}
           </List>
           <Divider />
           <List sx={{ position: "sticky", bottom: 0, background: "#fff" }}>
-            <ListItem>
+            <ListItem
+              sx={{
+                fontWeight: "bold",
+              }}
+            >
               Total:
-              {cart.reduce(
-                (acc, product) => acc + product.product.price * product.qty,
-                0
-              )}
+              <div style={{ marginLeft: "3px", marginRight: "140px" }}>
+                {cart.reduce(
+                  (acc, product) => acc + product.product.price * product.qty,
+                  0
+                )}
+                €
+              </div>
+              <Button onClick={checkOut} color="danger">
+                Clear
+              </Button>
               <Link to="/checkout">
                 <Button endDecorator={<KeyboardArrowRight />} color="success">
                   Checkout

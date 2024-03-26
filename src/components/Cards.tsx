@@ -24,15 +24,26 @@ export default function CardComp({ product }: Props) {
   return (
     <Card size="md" sx={{ width: 320, margin: "1em" }}>
       <NavLink to={`/products/${product.id}`}>
-        <AspectRatio minHeight="120px" maxHeight="300px">
+        {/* <AspectRatio minHeight="80px" maxHeight="300px"> */}
+        <div
+          style={{
+            overflow: "hidden",
+            height: "200px",
+            display: "grid",
+            placeContent: "center",
+          }}
+        >
           <img
             //  style={}
             //srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
             src={image}
             loading="lazy"
             alt=""
+            width={"50%"}
+            style={{ margin: "0 auto" }}
           />
-        </AspectRatio>
+        </div>
+        {/* </AspectRatio> */}
 
         <Typography level="title-lg">{title}</Typography>
         <Typography level="body-sm">{category}</Typography>
