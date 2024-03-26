@@ -36,7 +36,7 @@ hanno partecipato:
 ![Home](src/assets/Screen/ScreenDashMod.png)
 
 - Checkout page
-  ![Home](src/assets/Screen/ScreenCheckout.png)
+  ![Home](src/assets/Screen/ScreenCheckOut.png)
 - Checkout success
   ![Home](src/assets/Screen/ScreenCheckSuccess.png)
 
