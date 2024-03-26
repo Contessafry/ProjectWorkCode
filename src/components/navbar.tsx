@@ -29,7 +29,6 @@ export default function Navbar() {
         top: 0,
         zIndex: "1000",
       }}
-      marginBottom={3}
     >
       <List
         variant="soft"
