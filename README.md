@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# Project work Code
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Il progetto è un ecommerce al quale
+hanno partecipato:
 
-Currently, two official plugins are available:
+- [Marino Francesco](https://github.com/Contessafry)
+- [Sancarlo Giorgio](https://github.com/GiorgioSancarlo)
+- [Governale Samuele Alessandro](https://github.com/Alessandroromir)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Lista prodotti
+- Funzione di login
+- Aggiungi al carrello
+- Rimuovi singolo prodotto dal carrello
+- Rimuovi tutti i prodotti dal carrello
+- Checkout
+- schermata di pagamento
+- dashboard (accessibile solo da Admin)
+- Post e put dei prodotti
+- Delete prodotti
+- Funzione di ricerca
+- Salvataggio ordini
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Pages
 
-- Configure the top-level `parserOptions` property like this:
+- Home page
+  ![Home](src/assets/Screen/ScreenHome.png)
+- Dynamic product page
+  ![Home](src/assets/Screen/ScreenProduct.png)
+- Login page
+  ![Home](src/assets/Screen/ScreenLogin.png)
+- Dashboard page
+  ![Home](src/assets/Screen/ScreenDashBoard.png)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+![Home](src/assets/Screen/ScreenDashMod.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Checkout page
+  ![Home](src/assets/Screen/ScreenCheckout.png)
+- Checkout success
+  ![Home](src/assets/Screen/ScreenCheckSuccess.png)
+
+## stack di sviluppo :
+
+- [React](https://react.dev/)
+- [Material Ui](https://mui.com/)
+- [Json server](https://github.com/typicode/json-server)

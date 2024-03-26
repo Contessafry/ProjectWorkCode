@@ -38,7 +38,8 @@ function AppRouter() {
             path="*"
             element={
               <div>
-                Page not found <button>RETURN</button>
+                Page not found{" "}
+                <button onClick={() => window.history.go(-1)}>RETURN</button>
               </div>
             }
           />

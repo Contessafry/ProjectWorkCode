@@ -12,12 +12,12 @@ function PageHome() {
     <>
       <Box
         sx={{
+          height: "25rem",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundImage: `url(${srcImg})`,
           width: "100%",
-          height: "25rem",
         }}
       ></Box>
       <Grid
